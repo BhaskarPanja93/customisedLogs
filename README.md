@@ -1,4 +1,4 @@
-# customisedLogs v1.2.1
+# customisedLogs v1.2.2
 
 ```pip install customisedlogs --upgrade```
 
@@ -28,7 +28,7 @@ logger.info("CLIENT", "Port reserved")
 logger.skip("PROGRAM", "Started...")
 ```
 And it would look like:
-![output-readme.png](output-readme.png)
+![output-readme.png](https://raw.githubusercontent.com/BhaskarPanja93/customisedLogs/master/output-readme.png?raw=True)
 
 
 ### Future implementations:
