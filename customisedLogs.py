@@ -4,14 +4,14 @@ __version__ = "1.2.1"
 class Manager:
     from colr import color as __color
     from time import ctime as __ctime
-    def __init__(self, priority:int=-1, maxLogCount:int=1000):
+    def __init__(self, priority:int=0, maxLogCount:int=1000):
         """
         Initialise the Manager and then use the public functions to display coloured logs
         :param priority: Integer value to set minimum threshold of log verbosity
         :param maxLogCount: Maximum number of logs to store in memory, Values available as list in `Manager().allLogs`
         """
-        self._priority = priority
         self.allLogs = []
+        self._priority = priority
         self._maxLogCount = maxLogCount
 
         self._fatal = [5, (255, 0, 0), (90, 0, 0)]
@@ -48,8 +48,7 @@ class Manager:
 
     def skip(self, category: str, *args):
         """
-        Log with verbose value 1
-        :param category:
+        Log with verbosity value 1
         :param category: The string that gets decorated
         :param args: Other strings to pass
         """
@@ -65,8 +64,7 @@ class Manager:
 
     def info(self, category: str, *args):
         """
-        Log with verbose value 2
-        :param category:
+        Log with verbosity value 2
         :param category: The string that gets decorated
         :param args: Other strings to pass
         """
@@ -82,8 +80,7 @@ class Manager:
 
     def success(self, category: str, *args):
         """
-        Log with verbose value 3
-        :param category:
+        Log with verbosity value 3
         :param category: The string that gets decorated
         :param args: Other strings to pass
         """
@@ -99,8 +96,7 @@ class Manager:
 
     def failed(self, category: str, *args):
         """
-        Log with verbose value 4
-        :param category:
+        Log with verbosity value 4
         :param category: The string that gets decorated
         :param args: Other strings to pass
         """
@@ -116,8 +112,7 @@ class Manager:
 
     def fatal(self, category: str, *args):
         """
-        Log with verbose value 5
-        :param category:
+        Log with verbosity value 5
         :param category: The string that gets decorated
         :param args: Other strings to pass
         """
