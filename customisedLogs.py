@@ -1,4 +1,4 @@
-__version__ = "1.2.3"
+__version__ = "1.2.4"
 
 
 class Manager:
@@ -32,18 +32,17 @@ class Manager:
         self.allLogs.append(string)
         if len(self.allLogs) > self._maxLogCount:
             self.allLogs.pop(0)
-        print(Manager.__color(string, back=back, fore=fore))
+        print(self.__color(string, back=back, fore=fore))
 
 
-    @staticmethod
-    def __formString(category: str, *args:*list[str]):
+    def __formString(self, category: str, *args:*list[str]):
         """
         Decorate the log string and all other arguments passed into a single string
         :param category: The string that gets decorated
         :param args: Other strings to join to fina log
         :return:
         """
-        return f"[{Manager.__ctime()}] [{category}] {' '.join(args)}"
+        return f"[{self.__ctime()}] [{category}] {' '.join(args)}"
 
 
     def skip(self, category: str, *args):

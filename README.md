@@ -1,4 +1,4 @@
-# customisedLogs v1.2.3
+# customisedLogs v1.2.4
 
 ```pip install customisedlogs --upgrade```
 
