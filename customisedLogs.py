@@ -1,15 +1,17 @@
-__version__ = "1.2.5"
+__version__ = "1.3.0"
 
 
 class Manager:
-    from colr import color as __color
-    from time import ctime as __ctime
     def __init__(self, priority:int=0, maxLogCount:int=1000):
         """
         Initialise the Manager and then use the public functions to display coloured logs
         :param priority: Integer value to set minimum threshold of log verbosity
         :param maxLogCount: Maximum number of logs to store in memory, Values available as list in `Manager().allLogs`
         """
+        from colr import color as __color
+        from time import ctime as __ctime
+        self.__color = __color
+        self.__ctime = __ctime
         self.allLogs = []
         self._priority = priority
         self._maxLogCount = maxLogCount
@@ -53,11 +55,7 @@ class Manager:
         """
         string = self.__formString(category, *args)
         if self._skip[0] >= self._priority:
-            self.__log(
-                string,
-                back=self._skip[1],
-                fore=self._skip[2],
-            )
+            self.__log(string, back=self._skip[1], fore=self._skip[2])
         return string
 
 
@@ -69,11 +67,7 @@ class Manager:
         """
         string = self.__formString(category, *args)
         if self._info[0] >= self._priority:
-            self.__log(
-                string,
-                back=self._info[1],
-                fore=self._info[2],
-            )
+            self.__log(string, back=self._info[1], fore=self._info[2])
         return string
 
 
@@ -85,11 +79,7 @@ class Manager:
         """
         string = self.__formString(category, *args)
         if self._success[0] >= self._priority:
-            self.__log(
-                string,
-                back=self._success[1],
-                fore=self._success[2],
-            )
+            self.__log(string, back=self._success[1], fore=self._success[2])
         return string
 
 
@@ -101,11 +91,7 @@ class Manager:
         """
         string = self.__formString(category, *args)
         if self._failed[0] >= self._priority:
-            self.__log(
-                string,
-                back=self._failed[1],
-                fore=self._failed[2],
-            )
+            self.__log(string, back=self._failed[1], fore=self._failed[2])
         return string
 
 
@@ -117,10 +103,6 @@ class Manager:
         """
         string = self.__formString(category, *args)
         if self._fatal[0] >= self._priority:
-            self.__log(
-                string,
-                back=self._fatal[1],
-                fore=self._fatal[2],
-            )
+            self.__log(string, back=self._fatal[1], fore=self._fatal[2])
         return string
 
