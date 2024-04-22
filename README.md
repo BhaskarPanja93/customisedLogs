@@ -2,7 +2,6 @@
 
 ```pip install customisedlogs --upgrade```
 
-
 ###### <br>A well maintained program to have coloured logs on the terminal. This would help isolate errors and success messages from each other just by their colours.
 
 
