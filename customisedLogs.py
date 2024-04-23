@@ -1,4 +1,4 @@
-__version__ = "1.4.1"
+__version__ = "1.5.0"
 __packagename__ = "customisedlogs"
 
 
@@ -29,10 +29,10 @@ def updatePackage():
 
 
 class Manager:
-    def __init__(self, priority:int=0, maxLogCount:int=1000):
+    def __init__(self, verbosity:int=0, maxLogCount:int=1000):
         """
         Initialise the Manager and then use the public functions to display coloured logs
-        :param priority: Integer value to set minimum threshold of log verbosity
+        :param verbosity: Integer value to set minimum threshold of log verbosity
         :param maxLogCount: Maximum number of logs to store in memory, Values available as list in `Manager().allLogs`
         """
         from colr import color as __color
@@ -40,14 +40,14 @@ class Manager:
         self.__color = __color
         self.__ctime = __ctime
         self.allLogs = []
-        self._priority = priority
+        self._verbosity = verbosity
         self._maxLogCount = maxLogCount
 
-        self._fatal = [5, (255, 0, 0), (90, 0, 0)]
-        self._failed = [4, (255, 182, 0), (127, 89, 0)]
+        self._fatal = [1, (255, 0, 0), (90, 0, 0)]
+        self._failed = [2, (255, 182, 0), (127, 89, 0)]
         self._success = [3, (57, 202, 0), (23, 81, 0)]
-        self._info = [2, (0, 140, 255), (0, 52, 95)]
-        self._skip = [1, (0, 255, 195), (0, 100, 77)]
+        self._info = [4, (0, 140, 255), (0, 52, 95)]
+        self._skip = [5, (0, 255, 195), (0, 100, 77)]
 
 
     def __log(self, string: str, back: tuple[int,int,int], fore: tuple[int,int,int]):
@@ -81,7 +81,7 @@ class Manager:
         :param args: Other strings to pass
         """
         string = self.__formString(category, *args)
-        if self._skip[0] >= self._priority:
+        if self._skip[0] <= self._verbosity:
             self.__log(string, back=self._skip[1], fore=self._skip[2])
         return string
 
@@ -93,7 +93,7 @@ class Manager:
         :param args: Other strings to pass
         """
         string = self.__formString(category, *args)
-        if self._info[0] >= self._priority:
+        if self._info[0] <= self._verbosity:
             self.__log(string, back=self._info[1], fore=self._info[2])
         return string
 
@@ -105,7 +105,7 @@ class Manager:
         :param args: Other strings to pass
         """
         string = self.__formString(category, *args)
-        if self._success[0] >= self._priority:
+        if self._success[0] <= self._verbosity:
             self.__log(string, back=self._success[1], fore=self._success[2])
         return string
 
@@ -117,7 +117,7 @@ class Manager:
         :param args: Other strings to pass
         """
         string = self.__formString(category, *args)
-        if self._failed[0] >= self._priority:
+        if self._failed[0] <= self._verbosity:
             self.__log(string, back=self._failed[1], fore=self._failed[2])
         return string
 
@@ -129,7 +129,7 @@ class Manager:
         :param args: Other strings to pass
         """
         string = self.__formString(category, *args)
-        if self._fatal[0] >= self._priority:
+        if self._fatal[0] <= self._verbosity:
             self.__log(string, back=self._fatal[1], fore=self._fatal[2])
         return string
 
