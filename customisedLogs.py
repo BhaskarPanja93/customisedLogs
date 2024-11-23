@@ -1,4 +1,4 @@
-__version__ = "1.5.0"
+__version__ = "1.5.1"
 __packagename__ = "customisedlogs"
 
 
@@ -29,7 +29,7 @@ def updatePackage():
 
 
 class Manager:
-    def __init__(self, verbosity:int=0, maxLogCount:int=1000):
+    def __init__(self, verbosity:int=100, maxLogCount:int=1000):
         """
         Initialise the Manager and then use the public functions to display coloured logs
         :param verbosity: Integer value to set minimum threshold of log verbosity
