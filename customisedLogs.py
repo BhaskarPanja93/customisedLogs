@@ -1,4 +1,4 @@
-__version__ = "1.5.1"
+__version__ = "1.5.2"
 __packagename__ = "customisedlogs"
 
 
@@ -71,7 +71,7 @@ class Manager:
         :param args: Other strings to join to fina log
         :return:
         """
-        return f"[{self.__ctime()}] [{category}] {' '.join(args)}"
+        return f"[{self.__ctime()}] [{category}] {' '.join([str(arg) for arg in args])}"
 
 
     def skip(self, category: str, *args):
