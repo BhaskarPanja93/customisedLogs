@@ -1,4 +1,4 @@
-# customisedLogs v2.0.0
+# customisedLogs v2.0.1
 
 ```pip install customisedlogs --upgrade```
 
@@ -27,13 +27,13 @@ logger.log(logger.Colors.green_300, "Green", "This is green-300")
 logger.log(logger.Colors.black, "Black", "This is black")
 logger.log(logger.Colors.white, "White", "This is white")
 ```
-And it would look like:
+And it would look like:<br>
 ![output-readme.png](https://raw.githubusercontent.com/BhaskarPanja93/customisedLogs/master/output-readme.png?raw=True)
 
+The package contains all colours combinations from https://davidpiesse.github.io/tailwind-md-colours
 
 ### Future implementations:
 * Let user change the default RGB values.
-* Customised verbose levels.
 * Different formats. Compatible to render on HTML or any other stdout method.
 
 
