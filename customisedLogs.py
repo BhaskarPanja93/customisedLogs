@@ -1,4 +1,4 @@
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 __packagename__ = "customisedlogs"
 
 
@@ -324,7 +324,7 @@ class Imports:
 
 
 class CustomisedLogs:
-    def __init__(self, verbosity: int = 100, maxLogCount: int = 100):
+    def __init__(self, verbosity: int = 100, maxLogCount: int = 0):
         """
         Initialise the CustomisedLogs and then use the public functions to display colored logs
         :param verbosity: Integer value to set minimum threshold of log verbosity
@@ -347,34 +347,37 @@ class CustomisedLogs:
         :param fore: RGB tuple specifying the foreground color
         :return:
         """
-        self.history.append(string)
-        if len(self.history) > self._maxLogCount:
-            self.history.pop(0)
-        print(self.__colorPack(string, back=back, fore=fore))
+        if self._maxLogCount > 0:
+            self.history.append(string)
+            if len(self.history) > self._maxLogCount:
+                self.history.pop(0)
+        print(self.__colorPack(string + "\n" if string[-1] != "\n" and string else "", back=back, fore=fore), end="")
 
-    def __formString(self, category: str, *args) -> str:
+    def __formString(self, *args) -> str:
         """
         Decorate the log string and all other arguments passed into a single string
         :param category: A string representing the category of the log (user defined)
         :param args: Additional parameters needed to be logged
         :return:
         """
-        return f"[{self.__ctimePack()}] [{category}] {' '.join([str(arg) for arg in args])} "
+        special = args[0]
+        args = args[1:]
+        return f"[{self.__ctimePack()}] [{special}] {' '.join([str(arg) for arg in args])} "
 
-    def log(self, color: Imports.Colors, category: str, *args) -> str:
+    def log(self, color: Imports.Colors, *args, string: str|None = None) -> str:
         """
         Accepts color and other parameters to compile into the final output with colours
+        :param string: Prepared string to log, else will parse from args
         :param color: Must be a Member of CustomisedLogs.Colors
-        :param category: String representing the category of the log (user defined)
         :param args: Additional parameters needed to be logged
         :return: 
         """
         try:
             if color.name not in self.Colors._member_names_: raise
         except:
-            self.log(self.Colors.grey, "INVALID-COLOR", f"{color} must be a member of `LoggerPack.Colors`")
+            self.log(self.Colors.grey, "INVALID-COLOR", f"{color} must be a member of `CustomisedLogs.Colors`")
             color = self.Colors.black
-        string = self.__formString(category, *args)
+        string = string if string is not None else self.__formString(*args)
         if color.value["mv"] <= self._verbosity:
             self.__log(string, back=color.value["c"]["bg"], fore=color.value["c"]["fg"])
         return string

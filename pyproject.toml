@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "customisedLogs"
-version = "2.0.2"
+version = "2.0.3"
 description = "A well maintained package to have coloured logs on the terminal. This would help isolate errors and success messages from each other by their colours."
 readme = "README.md"
 maintainers = [{ name = "Bhindi", email = "bhaskarpanja93@gmail.com" },
